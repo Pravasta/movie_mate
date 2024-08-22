@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'core/import.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +11,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Movie Mate',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.darkTheme,
+      navigatorKey: navigatorKey,
+      initialRoute: RoutesName.initial,
+      onGenerateRoute: RoutesHandler.onGenerateRoute,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
