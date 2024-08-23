@@ -12,7 +12,7 @@ This application is designed for booking movie tickets in cinemas, using data fr
 - [you can see full source code at](https://github.com/Pravasta/movie_mate)
 - [Design figma by "Truong Huy" and you can see design in](https://www.figma.com/community/file/1329360533750743940)
 
-<img src="https://ibb.co.com/py0F23B" alt="MOVIEMate Cover" width="300"/>
+[MOVIEMate Logo](./assets/images/cover.png)
 
 <br>
 
