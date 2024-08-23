@@ -1,16 +1,31 @@
-# movie_mate
+# MovieMate
 
-A new Flutter project.
+A new Flutter Project for me MOVIEMate.
+This application is currently under development.
 
-## Getting Started
+## MovieMate description
 
-This project is a starting point for a Flutter application.
+This application is designed for booking movie tickets in cinemas, using data from the TMDB API and Laravel as the backend. The payment method is implemented using Midtrans. The project is currently ongoing.
 
-A few resources to get you started if this is your first Flutter project:
+## MovieMate Documentation :
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [you can see full source code at](https://github.com/Pravasta/movie_mate)
+- [Design figma by "Truong Huy" and you can see design in](https://www.figma.com/community/file/1329360533750743940)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://ibb.co.com/py0F23B" alt="MOVIEMate Cover" width="300"/>
+
+<br>
+
+<p align="center">
+ <a href="https://www.linkedin.com/in/pravasta-rama-f-004367211/" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Pravasta"/>
+ </a>
+ <a href="https://x.com/pravasta_rama?t=vTF-Zgr_FbS2tDoxbVqKBQ&s=09" target="_blank">
+  <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
+ </a>
+ <a href="https://www.instagram.com/fitrayanaf" target="_blank">
+  <img src="https://img.shields.io/badge/Instagram-fe4164?style=for-the-badge&logo=instagram&logoColor=white" alt="Fitrayanaf" />
+ </a> 
+</p>
+
+<br>

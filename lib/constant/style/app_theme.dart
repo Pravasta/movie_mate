@@ -29,13 +29,10 @@ class AppTheme {
       backgroundColor: AppColors.blackColor,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: AppColors.primaryColor,
-      selectedLabelStyle: AppText.text14.copyWith(
-        color: AppColors.primaryColor,
-      ),
+      selectedLabelStyle: AppText.text14.copyWith(fontWeight: FontWeight.bold),
       unselectedItemColor: AppColors.greyColor,
-      unselectedLabelStyle: AppText.text14.copyWith(
-        color: AppColors.greyColor,
-      ),
+      unselectedLabelStyle: AppText.text14
+          .copyWith(color: AppColors.greyColor, fontWeight: FontWeight.bold),
     ),
   );
 }

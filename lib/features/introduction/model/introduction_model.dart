@@ -7,4 +7,19 @@ class IntroductionModel {
     UrlAssets.bannerIntroImages3,
     UrlAssets.bannerIntroImages4,
   ];
+
+  static List<Map<String, dynamic>> listLanguage = [
+    {
+      'value': 0,
+      'title': 'English',
+    },
+    {
+      'value': 1,
+      'title': 'Indonesia',
+    },
+    {
+      'value': 2,
+      'title': 'Jawa',
+    }
+  ];
 }

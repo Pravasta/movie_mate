@@ -31,7 +31,7 @@ class DefaultButton extends StatelessWidget {
         minimumSize: Size(width, height),
         shape: RoundedRectangleBorder(
           side: BorderSide(color: borderColor),
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(30),
         ),
         backgroundColor: backgroundColor,
       ),

@@ -29,4 +29,9 @@ class UrlAssets {
   static String bannerMovieImages = '$_baseUrl/images/banner2.png';
   static String bannerMovieImages2 = '$_baseUrl/images/banner3.png';
   static String movieImages = '$_baseUrl/images/movie.png';
+  static String promoImages = '$_baseUrl/images/promo.png';
+  static String imaxImages = '$_baseUrl/images/imax.png';
+  static String retalImages = '$_baseUrl/images/retal.png';
+  static String dxImages = '$_baseUrl/images/4dx.png';
+  static String sweetboxImages = '$_baseUrl/images/sweetbox.png';
 }

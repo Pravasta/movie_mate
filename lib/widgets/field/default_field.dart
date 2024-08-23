@@ -58,18 +58,23 @@ class DefaultField extends StatelessWidget {
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(10),
           hintText: hintText,
-          hintStyle: AppText.text14,
+          hintStyle: AppText.text14.copyWith(color: AppColors.greyLightColor),
           labelText: labelText,
           labelStyle: AppText.text14,
           floatingLabelStyle: AppText.text14,
-          border: InputBorder.none,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+              color: AppColors.greyLightColor,
+            ),
+          ),
           suffixIcon: suffixIcon,
           suffixIconConstraints: suffixIconConstraints,
           disabledBorder: InputBorder.none,
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
+            borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              color: AppColors.greyColor,
+              color: AppColors.primaryColor,
             ),
           ),
         ),

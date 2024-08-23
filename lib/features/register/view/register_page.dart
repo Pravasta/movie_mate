@@ -1,10 +1,28 @@
 import 'package:movie_mate/core/import.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Widget usernameField() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Username',
+              style: AppText.text16.copyWith(
+                fontWeight: FontWeight.w700,
+                color: AppColors.primaryColor,
+              )),
+          const SizedBox(height: 10),
+          const DefaultField(
+            hintText: 'Input Username',
+            inputType: TextInputType.text,
+          ),
+        ],
+      );
+    }
+
     Widget emailField() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,8 +63,8 @@ class LoginPage extends StatelessWidget {
 
     Widget buttonField() {
       return DefaultButton(
-        title: 'Login',
-        onTap: () => Navigation.pushNameAndRemove(RoutesName.mainNavigation),
+        title: 'Register',
+        onTap: () {},
         height: 56,
       );
     }
@@ -61,7 +79,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 const Expanded(child: Divider(color: AppColors.greyColor)),
                 const SizedBox(width: 10),
-                Text('Or sign in with',
+                Text('Or sign up with',
                     style:
                         AppText.text12.copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(width: 10),
@@ -92,12 +110,14 @@ class LoginPage extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: const BackButton(color: AppColors.whiteColor),
-        title: const Text('Sign In'),
+        title: const Text('Sign Up'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         child: Column(
           children: [
+            usernameField(),
+            const SizedBox(height: 15),
             emailField(),
             const SizedBox(height: 15),
             passwordField(),

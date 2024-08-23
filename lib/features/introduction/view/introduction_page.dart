@@ -1,4 +1,5 @@
 import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/features/introduction/cubit/introduction_state.dart';
 
 class IntroductionPage extends StatelessWidget {
   const IntroductionPage({super.key});
@@ -44,83 +45,81 @@ class IntroductionPage extends StatelessWidget {
     }
 
     Widget content() {
-      return BlocProvider<ChangeBannerCubit>(
-        create: (context) => ChangeBannerCubit(),
-        child: BlocBuilder<ChangeBannerCubit, int>(
-          builder: (context, currentIndex) {
-            return Container(
-              margin: const EdgeInsets.all(18),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 3 / 5,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(height: 8),
-                  CarouselSlider(
-                    items: IntroductionModel.imagesSlider
-                        .map(
-                          (e) => Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                image: AssetImage(e),
-                                fit: BoxFit.cover,
-                              ),
+      return BlocBuilder<IntroductionCubit, IntroductionState>(
+        key: const Key('change-banner'),
+        builder: (context, state) {
+          return Container(
+            margin: const EdgeInsets.all(18),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 3 / 5,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 8),
+                CarouselSlider(
+                  items: IntroductionModel.imagesSlider
+                      .map(
+                        (e) => Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                              image: AssetImage(e),
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        )
-                        .toList(),
-                    options: CarouselOptions(
-                      viewportFraction: 1,
-                      aspectRatio: 1,
-                      enlargeCenterPage: true,
-                      initialPage: currentIndex,
-                      onPageChanged: (index, reason) {
-                        context.read<ChangeBannerCubit>().changeBanner(index);
-                      },
+                        ),
+                      )
+                      .toList(),
+                  options: CarouselOptions(
+                    viewportFraction: 1,
+                    aspectRatio: 1,
+                    enlargeCenterPage: true,
+                    initialPage: state.bannerIndex,
+                    onPageChanged: (index, reason) {
+                      context.read<IntroductionCubit>().changeBanner(index);
+                    },
+                  ),
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'MOVIEMate hello!',
+                      style:
+                          AppText.text26.copyWith(fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        'MOVIEMate hello!',
-                        style: AppText.text26
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'enjoy your favorite movies',
-                        style: AppText.text12,
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: IntroductionModel.imagesSlider
-                            .asMap()
-                            .entries
-                            .map((entry) {
-                          return Container(
-                            width: 8,
-                            height: 8,
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 4.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: currentIndex == entry.key
-                                  ? AppColors.primaryColor
-                                  : AppColors.greyColor,
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'enjoy your favorite movies',
+                      style: AppText.text12,
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: IntroductionModel.imagesSlider
+                          .asMap()
+                          .entries
+                          .map((entry) {
+                        return Container(
+                          width: 8,
+                          height: 8,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 4.0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: state.bannerIndex == entry.key
+                                ? AppColors.primaryColor
+                                : AppColors.greyColor,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
       );
     }
 
@@ -135,7 +134,7 @@ class IntroductionPage extends StatelessWidget {
             const SizedBox(height: 12),
             DefaultButton(
               title: 'Sign Up',
-              onTap: () {},
+              onTap: () => Navigation.pushName(RoutesName.register),
               titleColor: AppColors.whiteColor,
               height: 56,
               backgroundColor: AppColors.blackColor,
