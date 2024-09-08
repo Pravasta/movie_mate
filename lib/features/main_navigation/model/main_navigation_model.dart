@@ -1,26 +1,26 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class MainNavigationModel {
   static List<Map<String, dynamic>> listBottomNavbar = [
     {
       'label': 'Home',
       'index': 0,
-      'icon': UrlAssets.homeIcon,
+      'icon': Assets.icons.home.path,
     },
     {
       'label': 'Ticket',
       'index': 1,
-      'icon': UrlAssets.ticketIcon,
+      'icon': Assets.icons.ticket.path,
     },
     {
       'label': 'Movie',
       'index': 2,
-      'icon': UrlAssets.videoIcon,
+      'icon': Assets.icons.video.path,
     },
     {
       'label': 'Profile',
       'index': 3,
-      'icon': UrlAssets.userIcon,
+      'icon': Assets.icons.user.path,
     },
   ];
 

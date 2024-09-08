@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class MovieWatchlistCardWidget extends StatelessWidget {
   const MovieWatchlistCardWidget({super.key});
@@ -15,7 +15,7 @@ class MovieWatchlistCardWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(UrlAssets.movieImages),
+                image: AssetImage(Assets.images.movie.path),
               ),
             ),
           ),

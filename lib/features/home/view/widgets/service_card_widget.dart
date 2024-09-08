@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class ServiceCardWidget extends StatelessWidget {
   const ServiceCardWidget({super.key, required this.data});

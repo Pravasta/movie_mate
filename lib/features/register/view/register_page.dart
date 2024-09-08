@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -89,7 +89,7 @@ class RegisterPage extends StatelessWidget {
             DefaultButton(
               title: 'Google',
               titleColor: AppColors.whiteColor,
-              iconUrl: UrlAssets.googleIcon,
+              iconUrl: Assets.icons.google.path,
               backgroundColor: AppColors.blackLightColor,
               borderColor: AppColors.blackLightColor,
               onTap: () {},

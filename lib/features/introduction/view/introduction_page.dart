@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 import 'package:movie_mate/features/introduction/cubit/introduction_state.dart';
 
 class IntroductionPage extends StatelessWidget {
@@ -27,7 +27,7 @@ class IntroductionPage extends StatelessWidget {
               child: Row(
                 children: [
                   Image.asset(
-                    UrlAssets.translateIcon,
+                    Assets.icons.translate.path,
                     scale: 6,
                     color: AppColors.greyLightColor,
                   ),

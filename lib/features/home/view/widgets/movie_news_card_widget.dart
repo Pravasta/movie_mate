@@ -1,4 +1,4 @@
-import '../../../../core/import.dart';
+import '../../../../core/core.dart';
 
 class MovieNewsCardWidget extends StatelessWidget {
   const MovieNewsCardWidget({super.key});
@@ -13,7 +13,7 @@ class MovieNewsCardWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.asset(
-              UrlAssets.bannerMovieImages2,
+              Assets.images.banner2.path,
               fit: BoxFit.cover,
               height: MediaQuery.of(context).size.height * 1 / 5,
               width: MediaQuery.of(context).size.width * 3 / 4,

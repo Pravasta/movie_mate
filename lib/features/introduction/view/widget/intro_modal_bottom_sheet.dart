@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 import 'package:movie_mate/features/introduction/cubit/introduction_state.dart';
 
 Future<dynamic> introBottomSheet(BuildContext context) {

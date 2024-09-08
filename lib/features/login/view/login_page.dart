@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -71,7 +71,7 @@ class LoginPage extends StatelessWidget {
             DefaultButton(
               title: 'Google',
               titleColor: AppColors.whiteColor,
-              iconUrl: UrlAssets.googleIcon,
+              iconUrl: Assets.icons.google.path,
               backgroundColor: AppColors.blackLightColor,
               borderColor: AppColors.blackLightColor,
               onTap: () {},

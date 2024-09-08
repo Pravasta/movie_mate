@@ -1,6 +1,6 @@
 import 'package:movie_mate/features/main_navigation/cubit/main_navigation_cubit.dart';
 
-import '../../../core/import.dart';
+import '../../../core/core.dart';
 
 class MainNavigationPage extends StatelessWidget {
   const MainNavigationPage({super.key});

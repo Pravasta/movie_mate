@@ -1,11 +1,11 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class IntroductionModel {
   static List<String> imagesSlider = [
-    UrlAssets.bannerIntroImages,
-    UrlAssets.bannerIntroImages2,
-    UrlAssets.bannerIntroImages3,
-    UrlAssets.bannerIntroImages4,
+    Assets.images.banner.path,
+    Assets.images.bannerIntroImages2.path,
+    Assets.images.bannerIntroImages3.path,
+    Assets.images.bannerIntroImages4.path,
   ];
 
   static List<Map<String, dynamic>> listLanguage = [

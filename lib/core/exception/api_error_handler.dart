@@ -1,4 +1,4 @@
-import 'package:movie_mate/exception/api_exception.dart';
+import 'package:movie_mate/core/exception/api_exception.dart';
 
 class ApiErrorHandler {
   static Exception handleError({

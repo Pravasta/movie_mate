@@ -1,8 +1,9 @@
 import 'package:movie_mate/features/detail_page/view/detail_page.dart';
 import 'package:movie_mate/features/main_navigation/view/main_navigation_page.dart';
 import 'package:movie_mate/features/register/view/register_page.dart';
+import 'package:movie_mate/features/select_seat/view/select_seat_page.dart';
 
-import '../../core/import.dart';
+import '../../core.dart';
 
 class RoutesHandler {
   final String initialRoutes = RoutesName.initial;
@@ -48,6 +49,11 @@ class RoutesHandler {
       case RoutesName.detailPage:
         return MaterialPageRoute(
           builder: (context) => const DetailPage(),
+          settings: settings,
+        );
+      case RoutesName.selectSeat:
+        return MaterialPageRoute(
+          builder: (context) => const SelectSeatPage(),
           settings: settings,
         );
       default:

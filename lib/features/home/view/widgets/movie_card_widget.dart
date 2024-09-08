@@ -1,4 +1,4 @@
-import '../../../../core/import.dart';
+import '../../../../core/core.dart';
 
 class MovieCardWidget extends StatelessWidget {
   const MovieCardWidget({super.key});
@@ -13,7 +13,7 @@ class MovieCardWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.asset(
-              UrlAssets.movieImages,
+              Assets.images.movie.path,
               height: MediaQuery.of(context).size.height * 0.3,
               width: MediaQuery.of(context).size.width * 0.44,
               fit: BoxFit.cover,

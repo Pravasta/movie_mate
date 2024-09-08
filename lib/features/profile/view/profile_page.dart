@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(UrlAssets.avatarImages),
+                  image: AssetImage(Assets.images.avatar.path),
                 ),
               ),
             ),

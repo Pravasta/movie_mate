@@ -1,4 +1,4 @@
-import '../../core/import.dart';
+import '../../core.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({

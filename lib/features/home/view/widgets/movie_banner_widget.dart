@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class MovieBannerWidget extends StatelessWidget {
   const MovieBannerWidget({super.key, required this.data});

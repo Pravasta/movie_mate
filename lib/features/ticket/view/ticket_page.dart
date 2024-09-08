@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class TicketPage extends StatelessWidget {
   const TicketPage({super.key});

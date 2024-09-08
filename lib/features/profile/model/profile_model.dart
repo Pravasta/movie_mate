@@ -1,25 +1,25 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class ProfileModel {
   static List<Map<String, dynamic>> listMenu = [
     {
-      'icon': UrlAssets.myTickerIcon,
+      'icon': Assets.icons.myTicker,
       'label': 'My Ticket',
     },
     {
-      'icon': UrlAssets.shoppingCartIcon,
+      'icon': Assets.icons.shoppingCart,
       'label': 'Payment History',
     },
     {
-      'icon': UrlAssets.translateIcon,
+      'icon': Assets.icons.translate,
       'label': 'Change Language',
     },
     {
-      'icon': UrlAssets.lockIcon,
+      'icon': Assets.icons.lock,
       'label': 'Change Password',
     },
     {
-      'icon': UrlAssets.faceIdIcon,
+      'icon': Assets.icons.faceId,
       'label': 'Face ID / Touch ID',
     },
   ];

@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class TicketCardWidget extends StatelessWidget {
   const TicketCardWidget({super.key});
@@ -20,7 +20,7 @@ class TicketCardWidget extends StatelessWidget {
               bottomLeft: Radius.circular(15),
             ),
             child: Image.asset(
-              UrlAssets.bannerIntroImages,
+              Assets.images.banner.path,
               fit: BoxFit.cover,
               height: MediaQuery.of(context).size.height * 0.17,
               width: MediaQuery.of(context).size.width * 0.30,

@@ -1,9 +1,9 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 
 class HomeModel {
   static List<Map<String, dynamic>> listBanner = [
     {
-      'images': UrlAssets.bannerIntroImages,
+      'images': Assets.images.banner.path,
       'title': 'Avengers - Infiniry War',
       'genre': 'Action, adventure, sci-fi',
       'duration': '2h29m',
@@ -11,7 +11,7 @@ class HomeModel {
       'like_count': 1222,
     },
     {
-      'images': UrlAssets.bannerIntroImages2,
+      'images': Assets.images.bannerIntroImages2.path,
       'title': 'Avengers - End Game',
       'genre': 'Action, adventure, sci-fi',
       'duration': '3h15m',
@@ -19,7 +19,7 @@ class HomeModel {
       'like_count': 5000,
     },
     {
-      'images': UrlAssets.bannerIntroImages3,
+      'images': Assets.images.bannerIntroImages3.path,
       'title': 'Thor - Love and Thunder',
       'genre': 'Action, adventure, sci-fi',
       'duration': '2h15m',
@@ -27,7 +27,7 @@ class HomeModel {
       'like_count': 1000,
     },
     {
-      'images': UrlAssets.bannerIntroImages4,
+      'images': Assets.images.bannerIntroImages4.path,
       'title': 'Avengers',
       'genre': 'Action, adventure, sci-fi',
       'duration': '1h15m',
@@ -39,19 +39,19 @@ class HomeModel {
   static List<Map<String, dynamic>> listService = [
     {
       'label': 'Retal',
-      'images': UrlAssets.retalImages,
+      'images': Assets.images.retal.path,
     },
     {
       'label': 'Imax',
-      'images': UrlAssets.imaxImages,
+      'images': Assets.images.imax.path,
     },
     {
       'label': '4dx',
-      'images': UrlAssets.dxImages,
+      'images': Assets.images.a4dx.path,
     },
     {
       'label': 'Sweetbox',
-      'images': UrlAssets.sweetboxImages,
+      'images': Assets.images.sweetbox.path,
     },
   ];
 }

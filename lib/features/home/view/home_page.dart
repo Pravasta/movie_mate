@@ -1,4 +1,4 @@
-import 'package:movie_mate/core/import.dart';
+import 'package:movie_mate/core/core.dart';
 import 'package:badges/badges.dart' as badge;
 import 'package:movie_mate/features/home/view/widgets/movie_banner_widget.dart';
 
@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
                   borderSide:
                       BorderSide(color: AppColors.blackColor, width: 2)),
               child: Image.asset(
-                UrlAssets.notificationIcon,
+                Assets.icons.notification.path,
                 color: AppColors.whiteColor,
                 scale: 4,
               ),
@@ -160,7 +160,7 @@ class HomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             image: DecorationImage(
                 image: AssetImage(
-              UrlAssets.promoImages,
+              Assets.images.promo.path,
             )),
           ),
         ),

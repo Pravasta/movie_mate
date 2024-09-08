@@ -1,4 +1,4 @@
-import 'core/import.dart';
+import 'core/core.dart';
 
 void main() {
   runApp(const MyApp());
