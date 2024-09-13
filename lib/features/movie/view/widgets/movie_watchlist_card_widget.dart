@@ -1,12 +1,20 @@
 import 'package:movie_mate/core/core.dart';
+import 'package:movie_mate/core/variables/variable.dart';
+import 'package:movie_mate/data/model/genre_model.dart';
+import 'package:movie_mate/data/model/response/movie_response_model.dart';
 
 class MovieWatchlistCardWidget extends StatelessWidget {
-  const MovieWatchlistCardWidget({super.key});
+  const MovieWatchlistCardWidget({super.key, required this.movies});
+
+  final Result movies;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigation.pushName(RoutesName.detailPage),
+      onTap: () => Navigation.pushName(
+        RoutesName.detailPage,
+        arguments: movies.id,
+      ),
       child: Column(
         children: [
           Container(
@@ -15,16 +23,19 @@ class MovieWatchlistCardWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(Assets.images.movie.path),
+                image: NetworkImage(
+                  '${Variable.baseImageUrl}${movies.posterPath}',
+                ),
               ),
             ),
           ),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 3),
                 Text(
-                  'Avatar 2: The Way of Water',
+                  movies.title ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: AppText.text16.copyWith(
@@ -40,7 +51,7 @@ class MovieWatchlistCardWidget extends StatelessWidget {
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
-                        '4.0 (986)',
+                        '${movies.voteAverage} (${movies.voteCount})',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppText.text12
@@ -74,7 +85,14 @@ class MovieWatchlistCardWidget extends StatelessWidget {
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
-                        'Adventure, Sci-fi',
+                        GenreModel.listGenres
+                            .where((element) =>
+                                movies.genreIds!.contains(element['id']))
+                            .map(
+                              (e) => e['name'] as String,
+                            )
+                            .toList()
+                            .join(', '),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppText.text12

@@ -2,28 +2,36 @@ import 'package:movie_mate/core/core.dart';
 import 'package:badges/badges.dart' as badge;
 import 'package:movie_mate/features/home/view/widgets/movie_banner_widget.dart';
 
-class HomePage extends StatelessWidget {
+import '../bloc/coming_soon/coming_soon_movies_bloc.dart';
+import '../bloc/now_playing/now_playing_movies_bloc.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context
+        .read<NowPlayingMoviesBloc>()
+        .add(const NowPlayingMoviesEvent.getNowPlayingMovies());
+    context
+        .read<ComingSoonMoviesBloc>()
+        .add(const ComingSoonMoviesEvent.getComingSoonMovies());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Widget sectionTitle(String title, {required Function() onTap}) {
+    Widget sectionTitle(String title) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          children: [
-            Text(
-              title,
-              style: AppText.text18.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: onTap,
-              child: Text('See all',
-                  style:
-                      AppText.text12.copyWith(color: AppColors.primaryColor)),
-            )
-          ],
+        child: Text(
+          title,
+          style: AppText.text18.copyWith(fontWeight: FontWeight.bold),
         ),
       );
     }
@@ -78,75 +86,110 @@ class HomePage extends StatelessWidget {
     Widget nowPlaying() {
       return BlocBuilder<HomeCubit, int>(
         builder: (context, currentIndex) {
-          return Column(
-            children: [
-              CarouselSlider(
-                items: HomeModel.listBanner
-                    .map(
-                      (e) => GestureDetector(
-                          onTap: () =>
-                              Navigation.pushName(RoutesName.detailPage),
-                          child: MovieBannerWidget(data: e)),
-                    )
-                    .toList(),
-                options: CarouselOptions(
-                  viewportFraction: 0.8,
-                  aspectRatio: 0.75,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: false,
-                  initialPage: currentIndex,
-                  onPageChanged: (index, reason) {
-                    context.read<HomeCubit>().changeBanner(index);
-                  },
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: HomeModel.listBanner.asMap().entries.map((entry) {
-                  return Container(
-                    width: 15,
-                    height: 8,
-                    margin: const EdgeInsets.symmetric(vertical: 8.0),
-                    decoration: BoxDecoration(
-                      borderRadius: entry.key == 0 && currentIndex != 0
-                          ? const BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              bottomLeft: Radius.circular(12))
-                          : entry.key == HomeModel.listBanner.length - 1 &&
-                                  currentIndex !=
-                                      HomeModel.listBanner.length - 1
-                              ? const BorderRadius.only(
-                                  topRight: Radius.circular(12),
-                                  bottomRight: Radius.circular(12))
-                              : currentIndex == entry.key
-                                  ? BorderRadius.circular(12)
-                                  : null,
-                      color: currentIndex == entry.key
-                          ? AppColors.primaryColor
-                          : AppColors.greyColor,
-                    ),
+          return BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () => const SizedBox(),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (message) =>
+                    Center(child: Text(message.message, style: AppText.text16)),
+                loaded: (data) {
+                  return Column(
+                    children: [
+                      CarouselSlider(
+                        items: data
+                            .map(
+                              (e) => GestureDetector(
+                                  onTap: () => Navigation.pushName(
+                                        RoutesName.detailPage,
+                                        arguments: e.id,
+                                      ),
+                                  child: MovieBannerWidget(data: e)),
+                            )
+                            .toList(),
+                        options: CarouselOptions(
+                          viewportFraction: 0.8,
+                          aspectRatio: 0.75,
+                          enlargeCenterPage: true,
+                          enableInfiniteScroll: false,
+                          initialPage: currentIndex,
+                          onPageChanged: (index, reason) {
+                            context.read<HomeCubit>().changeBanner(index);
+                          },
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: data.asMap().entries.map((entry) {
+                          return Container(
+                            width: 15,
+                            height: 8,
+                            margin: const EdgeInsets.symmetric(vertical: 8.0),
+                            decoration: BoxDecoration(
+                              borderRadius: entry.key == 0 && currentIndex != 0
+                                  ? const BorderRadius.only(
+                                      topLeft: Radius.circular(12),
+                                      bottomLeft: Radius.circular(12))
+                                  : entry.key == data.length - 1 &&
+                                          currentIndex != data.length - 1
+                                      ? const BorderRadius.only(
+                                          topRight: Radius.circular(12),
+                                          bottomRight: Radius.circular(12))
+                                      : currentIndex == entry.key
+                                          ? BorderRadius.circular(12)
+                                          : null,
+                              color: currentIndex == entry.key
+                                  ? AppColors.primaryColor
+                                  : AppColors.blackLightColor,
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
                   );
-                }).toList(),
-              ),
-            ],
+                },
+              );
+            },
           );
         },
       );
     }
 
     Widget comingSoon() {
-      return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.42,
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-                onTap: () => Navigation.pushName(RoutesName.detailPage),
-                child: const MovieCardWidget());
-          },
-        ),
+      return BlocBuilder<ComingSoonMoviesBloc, ComingSoonMoviesState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            orElse: () => const SizedBox(),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (message) =>
+                Center(child: Text(message.message, style: AppText.text14)),
+            loaded: (data) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.42,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    final movie = data[index];
+                    return GestureDetector(
+                        onTap: () => Navigation.pushName(
+                              RoutesName.detailPage,
+                              arguments: movie.id,
+                            ),
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            left: 15,
+                            right: index == data.length - 1 ? 15 : 0,
+                          ),
+                          child: MovieCardWidget(movie: movie),
+                        ));
+                  },
+                ),
+              );
+            },
+          );
+        },
       );
     }
 
@@ -202,28 +245,29 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   appbar(),
                   const SizedBox(height: 15),
                   fieldSearch(),
                   const SizedBox(height: 20),
-                  sectionTitle('Now Playing', onTap: () {}),
+                  sectionTitle('Now Playing'),
                   const SizedBox(height: 15),
                   nowPlaying(),
                   const SizedBox(height: 20),
-                  sectionTitle('Coming Soon', onTap: () {}),
+                  sectionTitle('Coming Soon'),
                   const SizedBox(height: 15),
                   comingSoon(),
                   const SizedBox(height: 20),
-                  sectionTitle('Promo & Discount', onTap: () {}),
+                  sectionTitle('Promo & Discount'),
                   const SizedBox(height: 15),
                   promoDiscount(),
                   const SizedBox(height: 20),
-                  sectionTitle('Service', onTap: () {}),
+                  sectionTitle('Service'),
                   const SizedBox(height: 15),
                   service(),
                   const SizedBox(height: 20),
-                  sectionTitle('Movie News', onTap: () {}),
+                  sectionTitle('Movie News'),
                   const SizedBox(height: 15),
                   movieNews(),
                 ],

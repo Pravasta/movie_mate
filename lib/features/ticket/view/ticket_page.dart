@@ -15,7 +15,10 @@ class TicketPage extends StatelessWidget {
           child: ListView.builder(
             itemCount: 3,
             itemBuilder: (context, index) {
-              return const TicketCardWidget();
+              return GestureDetector(
+                onTap: () => Navigation.pushName(RoutesName.myTicket),
+                child: const TicketCardWidget(),
+              );
             },
           )),
     );

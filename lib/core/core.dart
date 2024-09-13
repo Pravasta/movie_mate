@@ -22,6 +22,11 @@ export '../features/home/view/widgets/service_card_widget.dart';
 export '../features/movie/view/widgets/movie_watchlist_card_widget.dart';
 export '../features/ticket/view/widgets/ticket_card_widget.dart';
 export '../features/profile/model/profile_model.dart';
+export '../features/detail_page/view/detail_page.dart';
+export '../features/main_navigation/view/main_navigation_page.dart';
+export '../features/payment/view/payment_page.dart';
+export '../features/register/view/register_page.dart';
+export '../features/select_seat/view/select_seat_page.dart';
 
 // WIDGETS
 export '../features/introduction/view/widget/intro_modal_bottom_sheet.dart';

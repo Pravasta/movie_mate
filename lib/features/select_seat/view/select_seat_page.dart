@@ -1,5 +1,8 @@
 import 'package:movie_mate/core/core.dart';
+import 'package:movie_mate/core/extensions/num_ext.dart';
 import 'package:movie_mate/features/select_seat/view/widgets/seat_widget.dart';
+import 'package:movie_mate/features/select_seat/view/widgets/select_data_widget.dart';
+import 'package:movie_mate/features/select_seat/view/widgets/select_time_widget.dart';
 
 class SelectSeatPage extends StatelessWidget {
   const SelectSeatPage({super.key});
@@ -101,7 +104,19 @@ class SelectSeatPage extends StatelessWidget {
     }
 
     Widget date() {
-      return Container();
+      return SizedBox(
+        width: context.deviceWidth,
+        child: Column(
+          children: [
+            Text('Select Date & Time',
+                style: AppText.text16.copyWith(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 20),
+            const SelectDataWidget(),
+            const SizedBox(height: 20),
+            const SelectTimeWidget(),
+          ],
+        ),
+      );
     }
 
     return Scaffold(
@@ -113,12 +128,39 @@ class SelectSeatPage extends StatelessWidget {
           style: AppText.text20,
         ),
       ),
-      body: Column(
+      body: ListView(
+        shrinkWrap: true,
         children: [
           screen(),
           seating(),
+          const SizedBox(height: 20),
           date(),
+          const SizedBox(height: 20),
         ],
+      ),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(width: 0.1, color: AppColors.whiteColor),
+          ),
+        ),
+        padding: const EdgeInsets.all(15),
+        child: Row(
+          children: [
+            Expanded(
+                child: Text(210000.currencyFormatRp,
+                    style: AppText.text22.copyWith(
+                        color: AppColors.primaryColor,
+                        fontWeight: FontWeight.bold))),
+            Expanded(
+              child: DefaultButton(
+                title: 'Select Seat',
+                height: 50,
+                onTap: () => Navigation.pushName(RoutesName.payment),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

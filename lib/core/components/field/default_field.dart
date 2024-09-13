@@ -7,6 +7,8 @@ class DefaultField extends StatelessWidget {
     this.labelText,
     this.suffixIcon,
     this.suffixIconConstraints,
+    this.prefixIcon,
+    this.prefixIconConstraints,
     this.isEnabled = true,
     this.readOnly = false,
     this.controller,
@@ -24,6 +26,8 @@ class DefaultField extends StatelessWidget {
   final String? labelText;
   final Widget? suffixIcon;
   final BoxConstraints? suffixIconConstraints;
+  final Widget? prefixIcon;
+  final BoxConstraints? prefixIconConstraints;
   final bool isEnabled;
   final bool readOnly;
   final TextEditingController? controller;
@@ -68,6 +72,8 @@ class DefaultField extends StatelessWidget {
               color: AppColors.greyLightColor,
             ),
           ),
+          prefixIcon: prefixIcon,
+          prefixIconConstraints: prefixIconConstraints,
           suffixIcon: suffixIcon,
           suffixIconConstraints: suffixIconConstraints,
           disabledBorder: InputBorder.none,

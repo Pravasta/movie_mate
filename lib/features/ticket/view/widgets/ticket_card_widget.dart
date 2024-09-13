@@ -41,6 +41,7 @@ class TicketCardWidget extends StatelessWidget {
                   children: [
                     const Icon(Icons.access_time_outlined,
                         color: AppColors.greyLightColor, size: 15),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         '14h15\' + 16.12.2022',
@@ -56,6 +57,7 @@ class TicketCardWidget extends StatelessWidget {
                   children: [
                     const Icon(Icons.location_on_outlined,
                         color: AppColors.greyLightColor, size: 15),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         'Vincom Ocean Park CGV',

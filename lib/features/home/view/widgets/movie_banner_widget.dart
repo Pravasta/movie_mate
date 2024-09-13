@@ -1,9 +1,13 @@
 import 'package:movie_mate/core/core.dart';
+import 'package:movie_mate/core/variables/variable.dart';
+import 'package:movie_mate/data/model/response/movie_response_model.dart';
+
+import '../../../../data/model/genre_model.dart';
 
 class MovieBannerWidget extends StatelessWidget {
   const MovieBannerWidget({super.key, required this.data});
 
-  final Map<String, dynamic> data;
+  final Result data;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,8 @@ class MovieBannerWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
-                image: AssetImage(data['images']),
+                image:
+                    NetworkImage('${Variable.baseImageUrl}${data.posterPath}'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -23,10 +28,18 @@ class MovieBannerWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          data['title'],
+          data.title ?? '',
           style: AppText.text20.copyWith(fontWeight: FontWeight.bold),
         ),
-        Text('${data['duration']} - ${data['genre']}',
+        Text(
+            GenreModel.listGenres
+                .where((element) => data.genreIds!.contains(element['id']))
+                .map(
+                  (e) => e['name'] as String,
+                )
+                .toList()
+                .join(', '),
+            textAlign: TextAlign.center,
             style: AppText.text12.copyWith(
               color: AppColors.greyLightColor,
             )),
@@ -35,7 +48,7 @@ class MovieBannerWidget extends StatelessWidget {
           children: [
             const Icon(Icons.star, color: AppColors.primaryColor),
             const SizedBox(width: 5),
-            Text('${data['rating']} (${data['like_count']})',
+            Text('${data.voteAverage} (${data.voteCount})',
                 style: AppText.text12),
           ],
         ),

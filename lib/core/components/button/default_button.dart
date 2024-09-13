@@ -12,6 +12,7 @@ class DefaultButton extends StatelessWidget {
     required this.onTap,
     this.elevation = 3,
     this.iconUrl,
+    this.borderRadius = 30,
   });
 
   final String title;
@@ -22,6 +23,7 @@ class DefaultButton extends StatelessWidget {
   final Function() onTap;
   final double elevation;
   final String? iconUrl;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class DefaultButton extends StatelessWidget {
         minimumSize: Size(width, height),
         shape: RoundedRectangleBorder(
           side: BorderSide(color: borderColor),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         backgroundColor: backgroundColor,
       ),

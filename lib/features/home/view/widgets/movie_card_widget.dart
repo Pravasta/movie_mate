@@ -1,19 +1,26 @@
+import 'package:movie_mate/core/extensions/date_time_ext.dart';
+import 'package:movie_mate/core/variables/variable.dart';
+import 'package:movie_mate/data/model/response/movie_response_model.dart';
+
 import '../../../../core/core.dart';
+import '../../../../data/model/genre_model.dart';
 
 class MovieCardWidget extends StatelessWidget {
-  const MovieCardWidget({super.key});
+  const MovieCardWidget({super.key, required this.movie});
+
+  final Result movie;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 15),
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.44,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: Image.asset(
-              Assets.images.movie.path,
+            child: Image.network(
+              '${Variable.baseImageUrl}${movie.posterPath}',
               height: MediaQuery.of(context).size.height * 0.3,
               width: MediaQuery.of(context).size.width * 0.44,
               fit: BoxFit.cover,
@@ -21,7 +28,9 @@ class MovieCardWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Avatar 2: The Way of Water',
+            movie.title ?? '',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: AppText.text14.copyWith(
                 color: AppColors.primaryColor, fontWeight: FontWeight.bold),
           ),
@@ -31,9 +40,18 @@ class MovieCardWidget extends StatelessWidget {
               const Icon(Icons.camera,
                   size: 18, color: AppColors.greyLightColor),
               const SizedBox(width: 5),
-              Text(
-                'Adventure, Sci-fi',
-                style: AppText.text12.copyWith(color: AppColors.greyLightColor),
+              Expanded(
+                child: Text(
+                    GenreModel.listGenres
+                        .where((element) =>
+                            movie.genreIds!.contains(element['id']))
+                        .map((e) => e['name'] as String)
+                        .toList()
+                        .join(', '),
+                    overflow: TextOverflow.ellipsis,
+                    style: AppText.text12.copyWith(
+                      color: AppColors.greyLightColor,
+                    )),
               ),
             ],
           ),
@@ -44,7 +62,7 @@ class MovieCardWidget extends StatelessWidget {
                   size: 18, color: AppColors.greyLightColor),
               const SizedBox(width: 5),
               Text(
-                '20.12.2024',
+                movie.releaseDate?.toFormattedDate() ?? '',
                 style: AppText.text12.copyWith(color: AppColors.greyLightColor),
               ),
             ],

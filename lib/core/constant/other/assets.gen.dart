@@ -32,6 +32,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/cgv.png
   AssetGenImage get cgv => const AssetGenImage('assets/icons/cgv.png');
 
+  /// File path: assets/icons/discount.png
+  AssetGenImage get discount =>
+      const AssetGenImage('assets/icons/discount.png');
+
   /// File path: assets/icons/face_id.png
   AssetGenImage get faceId => const AssetGenImage('assets/icons/face_id.png');
 
@@ -54,6 +58,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/notification.png
   AssetGenImage get notification =>
       const AssetGenImage('assets/icons/notification.png');
+
+  /// File path: assets/icons/qris.png
+  AssetGenImage get qris => const AssetGenImage('assets/icons/qris.png');
 
   /// File path: assets/icons/seating.png
   AssetGenImage get seating => const AssetGenImage('assets/icons/seating.png');
@@ -84,6 +91,7 @@ class $AssetsIconsGen {
         atm,
         calendar,
         cgv,
+        discount,
         faceId,
         google,
         home,
@@ -91,6 +99,7 @@ class $AssetsIconsGen {
         lotte,
         myTicker,
         notification,
+        qris,
         seating,
         shopeePay,
         shoppingCart,

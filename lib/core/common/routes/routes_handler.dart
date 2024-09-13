@@ -1,7 +1,4 @@
-import 'package:movie_mate/features/detail_page/view/detail_page.dart';
-import 'package:movie_mate/features/main_navigation/view/main_navigation_page.dart';
-import 'package:movie_mate/features/register/view/register_page.dart';
-import 'package:movie_mate/features/select_seat/view/select_seat_page.dart';
+import 'package:movie_mate/features/my_ticket/view/my_ticket_page.dart';
 
 import '../../core.dart';
 
@@ -47,13 +44,25 @@ class RoutesHandler {
           settings: settings,
         );
       case RoutesName.detailPage:
+        final id = settings.arguments;
+        if (id == null || id is! int) return _emptyPage;
         return MaterialPageRoute(
-          builder: (context) => const DetailPage(),
+          builder: (context) => DetailPage(id: id),
           settings: settings,
         );
       case RoutesName.selectSeat:
         return MaterialPageRoute(
           builder: (context) => const SelectSeatPage(),
+          settings: settings,
+        );
+      case RoutesName.payment:
+        return MaterialPageRoute(
+          builder: (context) => const PaymentPage(),
+          settings: settings,
+        );
+      case RoutesName.myTicket:
+        return MaterialPageRoute(
+          builder: (context) => const MyTicketPage(),
           settings: settings,
         );
       default:

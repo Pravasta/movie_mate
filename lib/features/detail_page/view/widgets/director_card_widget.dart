@@ -1,7 +1,7 @@
 import 'package:movie_mate/core/core.dart';
 
-class ActorCardWidget extends StatelessWidget {
-  const ActorCardWidget({super.key});
+class DirectorCardWidget extends StatelessWidget {
+  const DirectorCardWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
