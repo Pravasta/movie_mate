@@ -9,6 +9,7 @@ abstract class MovieRemoteDatasource {
   Future<MovieResponseModel> getNowPlayingMovies();
   Future<MovieResponseModel> getUpComingMovies();
   Future<MovieDetailResponseModel> getDetailMovie(int id);
+  Future<MovieResponseModel> searchMovie(String query);
 }
 
 class MovieRemoteDatasourceImpl implements MovieRemoteDatasource {
@@ -77,6 +78,28 @@ class MovieRemoteDatasourceImpl implements MovieRemoteDatasource {
 
     if (response.statusCode == 200) {
       return MovieDetailResponseModel.fromJson(response.body);
+    } else {
+      throw ApiErrorHandler.handleError(
+        statusCode: response.statusCode,
+        error: ApiException(message: response.body).message.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<MovieResponseModel> searchMovie(String query) async {
+    final header = {
+      'Authorization': 'Bearer ${Variable.apiKey}',
+      'accept': 'application/json',
+    };
+
+    final response = await _client.get(
+      _appEndpoint.searchMovie(query),
+      headers: header,
+    );
+
+    if (response.statusCode == 200) {
+      return MovieResponseModel.fromJson(response.body);
     } else {
       throw ApiErrorHandler.handleError(
         statusCode: response.statusCode,

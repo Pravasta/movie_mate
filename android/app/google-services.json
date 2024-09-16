@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "686397650804",
+    "project_id": "movie-mate-fe556",
+    "storage_bucket": "movie-mate-fe556.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686397650804:android:8f2b67909590afe0ee1e21",
+        "android_client_info": {
+          "package_name": "com.example.movie_mate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686397650804-t4k0g53qsmi31rcnpd3r76klpk5084ia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqfPIiesfx63cXcW-beyxcnXth622Onzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686397650804-t4k0g53qsmi31rcnpd3r76klpk5084ia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

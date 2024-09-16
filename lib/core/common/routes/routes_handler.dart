@@ -1,3 +1,6 @@
+import 'package:movie_mate/data/model/response/user_response_model.dart';
+import 'package:movie_mate/features/edit_profile/view/edit_profile_page.dart';
+import 'package:movie_mate/features/introduction/view/splash_page.dart';
 import 'package:movie_mate/features/my_ticket/view/my_ticket_page.dart';
 
 import '../../core.dart';
@@ -24,6 +27,11 @@ class RoutesHandler {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutesName.initial:
+        return MaterialPageRoute(
+          builder: (context) => const SplashPage(),
+          settings: settings,
+        );
+      case RoutesName.intro:
         return MaterialPageRoute(
           builder: (context) => const IntroductionPage(),
           settings: settings,
@@ -63,6 +71,13 @@ class RoutesHandler {
       case RoutesName.myTicket:
         return MaterialPageRoute(
           builder: (context) => const MyTicketPage(),
+          settings: settings,
+        );
+      case RoutesName.editProfile:
+        final data = settings.arguments;
+        if (data == null || data is! UserResponseModel) return _emptyPage;
+        return MaterialPageRoute(
+          builder: (context) => EditProfilePage(data: data),
           settings: settings,
         );
       default:

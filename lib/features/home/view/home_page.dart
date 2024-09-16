@@ -2,6 +2,7 @@ import 'package:movie_mate/core/core.dart';
 import 'package:badges/badges.dart' as badge;
 import 'package:movie_mate/features/home/view/widgets/movie_banner_widget.dart';
 
+import '../../profile/bloc/user/user_bloc.dart';
 import '../bloc/coming_soon/coming_soon_movies_bloc.dart';
 import '../bloc/now_playing/now_playing_movies_bloc.dart';
 
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     context
         .read<ComingSoonMoviesBloc>()
         .add(const ComingSoonMoviesEvent.getComingSoonMovies());
+    context.read<UserBloc>().add(const UserEvent.user());
     super.initState();
   }
 
@@ -44,9 +46,21 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Hi, Pravasta',
-                    style:
-                        AppText.text14.copyWith(fontWeight: FontWeight.w600)),
+                BlocBuilder<UserBloc, UserState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      orElse: () => const SizedBox(),
+                      loading: () => Text(
+                        'Loading...',
+                        style: AppText.text14
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      loaded: (user) => Text('Hi, ${user.name}',
+                          style: AppText.text14
+                              .copyWith(fontWeight: FontWeight.w600)),
+                    );
+                  },
+                ),
                 Text('Welcome Back',
                     style:
                         AppText.text18.copyWith(fontWeight: FontWeight.bold)),

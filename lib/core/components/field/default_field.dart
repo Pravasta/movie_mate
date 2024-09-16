@@ -3,7 +3,7 @@ import 'package:movie_mate/core/core.dart';
 class DefaultField extends StatelessWidget {
   const DefaultField({
     super.key,
-    required this.hintText,
+    this.hintText,
     this.labelText,
     this.suffixIcon,
     this.suffixIconConstraints,
@@ -22,7 +22,7 @@ class DefaultField extends StatelessWidget {
     this.validator,
   });
 
-  final String hintText;
+  final String? hintText;
   final String? labelText;
   final Widget? suffixIcon;
   final BoxConstraints? suffixIconConstraints;
@@ -56,10 +56,12 @@ class DefaultField extends StatelessWidget {
         textAlign: textAlign,
         cursorColor: AppColors.whiteColor,
         initialValue: intialText,
+        style: AppText.text14,
         keyboardType: inputType,
         obscureText: isObscure,
         maxLines: maxLines,
         decoration: InputDecoration(
+          focusColor: AppColors.whiteColor,
           contentPadding: const EdgeInsets.all(10),
           hintText: hintText,
           hintStyle: AppText.text14.copyWith(color: AppColors.greyLightColor),
@@ -76,7 +78,13 @@ class DefaultField extends StatelessWidget {
           prefixIconConstraints: prefixIconConstraints,
           suffixIcon: suffixIcon,
           suffixIconConstraints: suffixIconConstraints,
-          disabledBorder: InputBorder.none,
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+              color: AppColors.greyLightColor,
+            ),
+          ),
+          fillColor: AppColors.primaryColor,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(

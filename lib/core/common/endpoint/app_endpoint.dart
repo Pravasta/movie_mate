@@ -39,6 +39,18 @@ class AppEndpoint {
     );
   }
 
+  Uri searchMovie(String query, {String language = 'en-US', int page = 1}) {
+    return UriHelper.createUrl(
+      host: _baseUrl,
+      path: '3/search/movie',
+      queryParameters: {
+        'query': query,
+        'language': language,
+        'page': page,
+      },
+    );
+  }
+
   factory AppEndpoint.create() {
     return AppEndpoint(baseUrl: Variable.baseUrl);
   }

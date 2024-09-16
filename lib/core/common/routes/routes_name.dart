@@ -1,5 +1,6 @@
 class RoutesName {
   static const String initial = '/';
+  static const String intro = '/introduction';
   static const String login = '/login';
   static const String register = '/register';
   static const String mainNavigation = '/main-navigation';
@@ -11,6 +12,7 @@ class RoutesName {
   static const String detailPage = '/detail-page';
   static const String selectSeat = '/select-seat';
   static const String payment = '/payment';
+  static const String editProfile = '/edit-profile';
   static const String myTicket = '/my-ticket';
   static const String paymentHistory = '/payment-history';
 }
