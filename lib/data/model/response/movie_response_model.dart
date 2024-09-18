@@ -80,7 +80,7 @@ class Result {
   final String? overview;
   final double? popularity;
   final String? posterPath;
-  final DateTime? releaseDate;
+  final String? releaseDate;
   final String? title;
   final bool? video;
   final double? voteAverage;
@@ -104,8 +104,11 @@ class Result {
   });
 
   factory Result.fromJson(String str) => Result.fromMap(json.decode(str));
+  factory Result.fromLocalJson(String str) =>
+      Result.fromLocalMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
+  String toLocalJson() => json.encode(toLocalMap());
 
   factory Result.fromMap(Map<String, dynamic> json) => Result(
         adult: json["adult"],
@@ -119,13 +122,21 @@ class Result {
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
         posterPath: json["poster_path"],
-        releaseDate: json["release_date"] == null
-            ? null
-            : DateTime.parse(json["release_date"]),
+        releaseDate: json["release_date"],
         title: json["title"],
         video: json["video"],
         voteAverage: json["vote_average"]?.toDouble(),
         voteCount: json["vote_count"],
+      );
+
+  factory Result.fromLocalMap(Map<String, dynamic> json) => Result(
+        id: json["id"],
+        overview: json["overview"],
+        popularity: json["popularity"]?.toDouble(),
+        posterPath: json["posterPath"],
+        title: json["title"],
+        voteAverage: json["voteAverage"]?.toDouble(),
+        voteCount: json["vouteCount"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -139,11 +150,20 @@ class Result {
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
-        "release_date":
-            "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
+        "release_date": releaseDate,
         "title": title,
         "video": video,
         "vote_average": voteAverage,
         "vote_count": voteCount,
+      };
+
+  Map<String, dynamic> toLocalMap() => {
+        "id": id,
+        "overview": overview,
+        "popularity": popularity,
+        "posterPath": posterPath,
+        "title": title,
+        "voteAverage": voteAverage,
+        "voteCount": voteCount,
       };
 }

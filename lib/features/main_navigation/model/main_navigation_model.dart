@@ -8,7 +8,7 @@ class MainNavigationModel {
       'icon': Assets.icons.home.path,
     },
     {
-      'label': 'Ticket',
+      'label': 'Watchlist',
       'index': 1,
       'icon': Assets.icons.ticket.path,
     },
@@ -26,7 +26,7 @@ class MainNavigationModel {
 
   static List<Widget> listPage = [
     const HomePage(),
-    const TicketPage(),
+    const WatchlistMoviePage(),
     const MoviePage(),
     const ProfilePage(),
   ];

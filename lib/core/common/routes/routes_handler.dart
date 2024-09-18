@@ -2,6 +2,7 @@ import 'package:movie_mate/data/model/response/user_response_model.dart';
 import 'package:movie_mate/features/edit_profile/view/edit_profile_page.dart';
 import 'package:movie_mate/features/introduction/view/splash_page.dart';
 import 'package:movie_mate/features/my_ticket/view/my_ticket_page.dart';
+import 'package:movie_mate/features/search/view/search_page.dart';
 
 import '../../core.dart';
 
@@ -78,6 +79,11 @@ class RoutesHandler {
         if (data == null || data is! UserResponseModel) return _emptyPage;
         return MaterialPageRoute(
           builder: (context) => EditProfilePage(data: data),
+          settings: settings,
+        );
+      case RoutesName.search:
+        return MaterialPageRoute(
+          builder: (context) => const SearchPage(),
           settings: settings,
         );
       default:

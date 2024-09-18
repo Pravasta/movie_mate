@@ -51,6 +51,7 @@ dependencies:
   firebase_auth: ^5.2.1
   cloud_firestore: ^5.4.1
   google_sign_in: ^6.2.1
+  rxdart: ^0.28.0
 
 dev_dependencies:
   freezed: ^2.5.7

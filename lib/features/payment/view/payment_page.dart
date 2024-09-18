@@ -13,7 +13,8 @@ class PaymentPage extends StatelessWidget {
     int selectedPayment = 0;
 
     Widget bannerMovieSelected() {
-      return const TicketCardWidget();
+      // return const WatchlistMovieCard();
+      return const SizedBox();
     }
 
     Widget detailOrder() {

@@ -1,8 +1,11 @@
 import 'package:expandable_text/expandable_text.dart';
+import 'package:movie_mate/core/components/message/message_bar.dart';
 import 'package:movie_mate/core/core.dart';
 import 'package:movie_mate/core/extensions/date_time_ext.dart';
 import 'package:movie_mate/core/variables/variable.dart';
-import 'package:movie_mate/features/detail_page/bloc/movie_detail_bloc.dart';
+import 'package:movie_mate/data/model/response/movie_response_model.dart';
+import 'package:movie_mate/features/detail_page/bloc/bloc/crud_watchlist_movie_bloc.dart';
+import 'package:movie_mate/features/detail_page/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:movie_mate/features/detail_page/model/detail_page_model.dart';
 import 'package:movie_mate/features/detail_page/view/widgets/director_card_widget.dart';
 
@@ -24,6 +27,9 @@ class _DetailPageState extends State<DetailPage> {
     context
         .read<MovieDetailBloc>()
         .add(MovieDetailEvent.getMovieDetail(widget.id));
+    context
+        .read<CrudWatchlistMovieBloc>()
+        .add(CrudWatchlistMovieEvent.isAddedWatchlistMovie(widget.id));
     super.initState();
   }
 
@@ -44,6 +50,8 @@ class _DetailPageState extends State<DetailPage> {
           children: [
             Text(
               data.title ?? '',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: AppText.text22.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),
@@ -67,13 +75,101 @@ class _DetailPageState extends State<DetailPage> {
                   const Icon(Icons.star, size: 35, color: AppColors.greyColor),
                 const SizedBox(width: 25),
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: AppColors.greyColor)),
-                    child: Center(
-                        child: Text('Add Watchlist', style: AppText.text12)),
+                  child: BlocConsumer<CrudWatchlistMovieBloc,
+                      CrudWatchlistMovieState>(
+                    listenWhen: (previous, current) {
+                      final messagePrevious = previous.maybeWhen(
+                        orElse: () {},
+                        success: (message) => message,
+                      );
+                      final messageCurrent = previous.maybeWhen(
+                        orElse: () {},
+                        success: (message) => message,
+                      );
+
+                      return messagePrevious != messageCurrent ||
+                          messagePrevious != '';
+                    },
+                    listener: (context, state) {
+                      state.maybeWhen(
+                        orElse: () {},
+                        error: (message) =>
+                            MessageBar.messageBar(context, message),
+                        success: (message) =>
+                            MessageBar.messageBar(context, message),
+                      );
+                    },
+                    builder: (context, state) {
+                      final states = state.maybeWhen(
+                        orElse: () {},
+                        isAdded: (isAdded) => isAdded,
+                      );
+
+                      return state.maybeWhen(
+                        orElse: () {
+                          return GestureDetector(
+                            onTap: () {
+                              final dataMovie = Result(
+                                id: data.id,
+                                overview: data.overview,
+                                popularity: data.popularity,
+                                posterPath: data.posterPath,
+                                title: data.title,
+                                voteAverage: data.voteAverage,
+                                voteCount: data.voteCount,
+                              );
+
+                              if (states == false) {
+                                context.read<CrudWatchlistMovieBloc>().add(
+                                      CrudWatchlistMovieEvent.addWatchlistMovie(
+                                          dataMovie),
+                                    );
+                              } else {
+                                context.read<CrudWatchlistMovieBloc>().add(
+                                      CrudWatchlistMovieEvent
+                                          .removeWatchlistMovie(data.id!),
+                                    );
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: states == false
+                                      ? AppColors.blackColor
+                                      : AppColors.primaryDarkColor,
+                                  border: Border.all(
+                                    color: states == false
+                                        ? AppColors.greyColor
+                                        : AppColors.primaryColor,
+                                  )),
+                              child: Center(
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    states == false ? Icons.add : Icons.check,
+                                    color: states == false
+                                        ? AppColors.whiteColor
+                                        : AppColors.primaryColor,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text('Add Watchlist',
+                                      style: AppText.text12.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: states == false
+                                            ? AppColors.whiteColor
+                                            : AppColors.primaryColor,
+                                      ))
+                                ],
+                              )),
+                            ),
+                          );
+                        },
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -235,7 +331,9 @@ class _DetailPageState extends State<DetailPage> {
                               padding: EdgeInsets.symmetric(vertical: 20),
                               child: Row(
                                 children: [
-                                  BackButton(color: AppColors.whiteColor),
+                                  BackButton(
+                                    color: AppColors.whiteColor,
+                                  ),
                                 ],
                               ),
                             ),

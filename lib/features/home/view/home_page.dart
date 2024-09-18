@@ -86,13 +86,19 @@ class _HomePageState extends State<HomePage> {
     }
 
     Widget fieldSearch() {
-      return const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        child: DefaultField(
-          hintText: 'Search',
-          backgroundColor: AppColors.greySecondColor,
-          suffixIcon: Icon(Icons.search),
-          inputType: TextInputType.emailAddress,
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: GestureDetector(
+          onTap: () {
+            Navigation.pushName(RoutesName.search);
+          },
+          child: const DefaultField(
+            hintText: 'Search',
+            isEnabled: false,
+            backgroundColor: AppColors.greySecondColor,
+            suffixIcon: Icon(Icons.search),
+            inputType: TextInputType.emailAddress,
+          ),
         ),
       );
     }

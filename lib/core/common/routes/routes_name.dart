@@ -12,6 +12,7 @@ class RoutesName {
   static const String detailPage = '/detail-page';
   static const String selectSeat = '/select-seat';
   static const String payment = '/payment';
+  static const String search = '/search';
   static const String editProfile = '/edit-profile';
   static const String myTicket = '/my-ticket';
   static const String paymentHistory = '/payment-history';

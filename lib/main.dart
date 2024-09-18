@@ -1,11 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:movie_mate/features/detail_page/bloc/bloc/crud_watchlist_movie_bloc.dart';
+import 'package:movie_mate/features/search/bloc/search_movie_bloc.dart';
+import 'package:movie_mate/features/search/repository/search_repository.dart';
+import 'package:movie_mate/features/watchlist_movie/bloc/get_watchlist_movie_bloc.dart';
+import 'package:movie_mate/features/watchlist_movie/repository/watchlist_movie_repository.dart';
+import 'core/utils/route_observer.dart';
 import 'features/auth/bloc/forgot_password/forgot_password_bloc.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
 import 'features/auth/bloc/login_google/login_google_bloc.dart';
 import 'features/auth/bloc/logout/logout_bloc.dart';
 import 'features/auth/bloc/register/register_bloc.dart';
 import 'features/auth/repository/auth_repository.dart';
-import 'features/detail_page/bloc/movie_detail_bloc.dart';
+import 'features/detail_page/bloc/movie_detail/movie_detail_bloc.dart';
 import 'features/detail_page/repository/movie_detail_repository.dart';
 import 'features/edit_profile/bloc/edit_user_bloc.dart';
 import 'features/edit_profile/repository/edit_profile_repository.dart';
@@ -69,7 +75,18 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (_) => ForgotPasswordBloc(AuthRepositoryImpl.create()),
-          )
+          ),
+          BlocProvider(
+            create: (_) => SearchMovieBloc(SearchRepositoryImpl.create()),
+          ),
+          BlocProvider(
+            create: (_) =>
+                GetWatchlistMovieBloc(WatchlistMovieRepositoryImpl.create()),
+          ),
+          BlocProvider(
+            create: (_) =>
+                CrudWatchlistMovieBloc(MovieDetailRepositoryImpl.create()),
+          ),
         ],
         child: MaterialApp(
           title: 'Movie Mate',
@@ -78,6 +95,7 @@ class MyApp extends StatelessWidget {
           initialRoute: RoutesName.initial,
           onGenerateRoute: RoutesHandler.onGenerateRoute,
           debugShowCheckedModeBanner: false,
+          navigatorObservers: [routeObserver],
         ));
   }
 }

@@ -1,4 +1,3 @@
-import 'package:movie_mate/core/extensions/date_time_ext.dart';
 import 'package:movie_mate/core/variables/variable.dart';
 import 'package:movie_mate/data/model/response/movie_response_model.dart';
 
@@ -62,7 +61,7 @@ class MovieCardWidget extends StatelessWidget {
                   size: 18, color: AppColors.greyLightColor),
               const SizedBox(width: 5),
               Text(
-                movie.releaseDate?.toFormattedDate() ?? '',
+                movie.releaseDate ?? '',
                 style: AppText.text12.copyWith(color: AppColors.greyLightColor),
               ),
             ],
