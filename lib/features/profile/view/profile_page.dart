@@ -207,16 +207,15 @@ class ProfilePage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 15),
-          child: Column(
+          child: ListView(
             children: [
               header(),
               menu(),
-              const Spacer(),
-              logout(),
             ],
           ),
         ),
       ),
+      floatingActionButton: logout(),
     );
   }
 }

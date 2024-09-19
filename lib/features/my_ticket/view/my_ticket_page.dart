@@ -9,6 +9,21 @@ class MyTicketPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppBar appBar() {
+      return AppBar(
+        centerTitle: true,
+        leading: BackButton(
+          color: AppColors.whiteColor,
+          onPressed: () =>
+              Navigation.pushNameAndRemove(RoutesName.mainNavigation),
+        ),
+        title: Text(
+          'My Ticket',
+          style: AppText.text20,
+        ),
+      );
+    }
+
     Widget header() {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,19 +196,67 @@ class MyTicketPage extends StatelessWidget {
       );
     }
 
+    Widget barcode() {
+      return Container(
+        width: context.deviceWidth,
+        padding: const EdgeInsets.all(20),
+        height: context.deviceHeight * 1 / 5,
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(15),
+              bottomRight: Radius.circular(15),
+            ),
+            color: AppColors.whiteColor),
+        child: SfBarcodeGenerator(
+          value: 'Order ID: 78889377726',
+          symbology: Code128(),
+          showValue: true,
+          textStyle: AppText.text12.copyWith(color: AppColors.blackColor),
+        ),
+      );
+    }
+
+    Widget designCircular() {
+      return Container(
+        width: context.deviceWidth,
+        color: AppColors.whiteColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: 25,
+              height: 50,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
+                color: AppColors.blackColor,
+              ),
+            ),
+            const Expanded(
+                child: MySeparator(
+              color: AppColors.blackColor,
+              height: 2,
+            )),
+            Container(
+              width: 25,
+              height: 50,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  bottomLeft: Radius.circular(30),
+                ),
+                color: AppColors.blackColor,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading: BackButton(
-          color: AppColors.whiteColor,
-          onPressed: () =>
-              Navigation.pushNameAndRemove(RoutesName.mainNavigation),
-        ),
-        title: Text(
-          'My Ticket',
-          style: AppText.text20,
-        ),
-      ),
+      appBar: appBar(),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -219,60 +282,9 @@ class MyTicketPage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: context.deviceWidth,
-              color: AppColors.whiteColor,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 25,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
-                      ),
-                      color: AppColors.blackColor,
-                    ),
-                  ),
-                  const Expanded(
-                      child: MySeparator(
-                    color: AppColors.blackColor,
-                    height: 2,
-                  )),
-                  Container(
-                    width: 25,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        bottomLeft: Radius.circular(30),
-                      ),
-                      color: AppColors.blackColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            designCircular(),
             // Barcode
-            Container(
-              width: context.deviceWidth,
-              padding: const EdgeInsets.all(20),
-              height: context.deviceHeight * 1 / 5,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
-                  ),
-                  color: AppColors.whiteColor),
-              child: SfBarcodeGenerator(
-                value: 'Order ID: 78889377726',
-                symbology: Code128(),
-                showValue: true,
-                textStyle: AppText.text12.copyWith(color: AppColors.blackColor),
-              ),
-            ),
+            barcode(),
           ],
         ),
       ),

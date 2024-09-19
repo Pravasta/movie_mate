@@ -119,26 +119,8 @@ class SelectSeatPage extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading: const BackButton(color: AppColors.whiteColor),
-        title: Text(
-          'Select Seat',
-          style: AppText.text20,
-        ),
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        children: [
-          screen(),
-          seating(),
-          const SizedBox(height: 20),
-          date(),
-          const SizedBox(height: 20),
-        ],
-      ),
-      bottomNavigationBar: Container(
+    Widget bottomNavbar() {
+      return Container(
         decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(width: 0.1, color: AppColors.whiteColor),
@@ -161,7 +143,29 @@ class SelectSeatPage extends StatelessWidget {
             ),
           ],
         ),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        leading: const BackButton(color: AppColors.whiteColor),
+        title: Text(
+          'Select Seat',
+          style: AppText.text20,
+        ),
       ),
+      body: ListView(
+        shrinkWrap: true,
+        children: [
+          screen(),
+          seating(),
+          const SizedBox(height: 20),
+          date(),
+          const SizedBox(height: 20),
+        ],
+      ),
+      bottomNavigationBar: bottomNavbar(),
     );
   }
 }
