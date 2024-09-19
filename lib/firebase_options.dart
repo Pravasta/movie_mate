@@ -50,21 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAqfPIiesfx63cXcW-beyxcnXth622Onzw',
-    appId: '1:686397650804:android:8f2b67909590afe0ee1e21',
-    messagingSenderId: '686397650804',
-    projectId: 'movie-mate-fe556',
-    storageBucket: 'movie-mate-fe556.appspot.com',
+    apiKey: 'AIzaSyC-wZvUxfln1jZfkKRznoS0YbQAUfag1os',
+    appId: '1:468798582383:android:53294767e3ebf0ba4a279a',
+    messagingSenderId: '468798582383',
+    projectId: 'movie-mate-9e891',
+    storageBucket: 'movie-mate-9e891.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBpiX2Dy28vCVZjZM6IADMiDG7a5izi-xQ',
-    appId: '1:686397650804:ios:4cccfb3f5286fa3aee1e21',
-    messagingSenderId: '686397650804',
-    projectId: 'movie-mate-fe556',
-    storageBucket: 'movie-mate-fe556.appspot.com',
-    iosClientId:
-        '686397650804-0s9dbn965btrbt3b35ajmh7lofa69fh9.apps.googleusercontent.com',
-    iosBundleId: 'com.example.movieMate',
+    apiKey: 'AIzaSyBm7gNbh2msvrLLIKjqdxZy-PIyE62ie-w',
+    appId: '1:468798582383:ios:9eed0a218a7a71164a279a',
+    messagingSenderId: '468798582383',
+    projectId: 'movie-mate-9e891',
+    storageBucket: 'movie-mate-9e891.appspot.com',
+    iosClientId: '468798582383-n1bsc4ggclakai8ks453mkt9ka53bu52.apps.googleusercontent.com',
+    iosBundleId: 'com.pravasta.moviemate',
   );
 }

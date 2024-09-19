@@ -1,33 +1,91 @@
 {
   "project_info": {
-    "project_number": "686397650804",
-    "project_id": "movie-mate-fe556",
-    "storage_bucket": "movie-mate-fe556.appspot.com"
+    "project_number": "468798582383",
+    "project_id": "movie-mate-9e891",
+    "storage_bucket": "movie-mate-9e891.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:686397650804:android:8f2b67909590afe0ee1e21",
+        "mobilesdk_app_id": "1:468798582383:android:cd11c072f3329d5a4a279a",
         "android_client_info": {
           "package_name": "com.example.movie_mate"
         }
       },
       "oauth_client": [
         {
-          "client_id": "686397650804-t4k0g53qsmi31rcnpd3r76klpk5084ia.apps.googleusercontent.com",
+          "client_id": "468798582383-evkg2c3kftcgdvemd0fp9gvh7ngsglqg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAqfPIiesfx63cXcW-beyxcnXth622Onzw"
+          "current_key": "AIzaSyC-wZvUxfln1jZfkKRznoS0YbQAUfag1os"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "686397650804-t4k0g53qsmi31rcnpd3r76klpk5084ia.apps.googleusercontent.com",
+              "client_id": "468798582383-evkg2c3kftcgdvemd0fp9gvh7ngsglqg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468798582383:android:8684adfd6d9370924a279a",
+        "android_client_info": {
+          "package_name": "com.pravasta.movie_mate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468798582383-evkg2c3kftcgdvemd0fp9gvh7ngsglqg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-wZvUxfln1jZfkKRznoS0YbQAUfag1os"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468798582383-evkg2c3kftcgdvemd0fp9gvh7ngsglqg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468798582383:android:53294767e3ebf0ba4a279a",
+        "android_client_info": {
+          "package_name": "com.pravasta.moviemate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468798582383-evkg2c3kftcgdvemd0fp9gvh7ngsglqg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-wZvUxfln1jZfkKRznoS0YbQAUfag1os"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468798582383-evkg2c3kftcgdvemd0fp9gvh7ngsglqg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

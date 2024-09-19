@@ -1,4 +1,4 @@
-package com.example.movie_mate
+package com.pravasta.moviemate
 
 import io.flutter.embedding.android.FlutterActivity
 
