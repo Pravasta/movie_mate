@@ -1,5 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:movie_mate/features/detail_page/bloc/bloc/crud_watchlist_movie_bloc.dart';
+import 'package:movie_mate/features/my_ticket/bloc/get_all_ticket_orders_bloc.dart';
+import 'package:movie_mate/features/my_ticket/repository/my_ticket_repository.dart';
+import 'package:movie_mate/features/payment/bloc/create_order_bloc.dart';
+import 'package:movie_mate/features/payment/repository/order_repository.dart';
 import 'package:movie_mate/features/search/bloc/search_movie_bloc.dart';
 import 'package:movie_mate/features/search/repository/search_repository.dart';
 import 'package:movie_mate/features/watchlist_movie/bloc/get_watchlist_movie_bloc.dart';
@@ -86,6 +90,13 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (_) =>
                 CrudWatchlistMovieBloc(MovieDetailRepositoryImpl.create()),
+          ),
+          BlocProvider(
+            create: (_) => CreateOrderBloc(OrderRepositoryImpl.create()),
+          ),
+          BlocProvider(
+            create: (_) =>
+                GetAllTicketOrdersBloc(MyTicketRepositoryImpl.create()),
           ),
         ],
         child: MaterialApp(

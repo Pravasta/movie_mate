@@ -1,11 +1,23 @@
 import 'package:movie_mate/core/core.dart';
 import 'package:movie_mate/core/extensions/num_ext.dart';
+import 'package:movie_mate/data/model/response/order_model.dart';
+import 'package:movie_mate/features/select_seat/model/seat_model.dart';
 import 'package:movie_mate/features/select_seat/view/widgets/seat_widget.dart';
 import 'package:movie_mate/features/select_seat/view/widgets/select_data_widget.dart';
 import 'package:movie_mate/features/select_seat/view/widgets/select_time_widget.dart';
 
-class SelectSeatPage extends StatelessWidget {
-  const SelectSeatPage({super.key});
+class SelectSeatPage extends StatefulWidget {
+  const SelectSeatPage({super.key, required this.orderData});
+
+  final OrderModel orderData;
+
+  @override
+  State<SelectSeatPage> createState() => _SelectSeatPageState();
+}
+
+class _SelectSeatPageState extends State<SelectSeatPage> {
+  int indexTime = 0;
+  String selectedTime = '09:00';
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +125,28 @@ class SelectSeatPage extends StatelessWidget {
             const SizedBox(height: 20),
             const SelectDataWidget(),
             const SizedBox(height: 20),
-            const SelectTimeWidget(),
+            StatefulBuilder(
+              builder: (context, setState) {
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                      children: SeatModel.dataTime
+                          .map(
+                            (e) => SelectTimeWidget(
+                              isActive: indexTime == e['index'],
+                              onPressed: () {
+                                setState(() {
+                                  indexTime = e['index'];
+                                  selectedTime = e['time'];
+                                });
+                              },
+                              title: e['time'],
+                            ),
+                          )
+                          .toList()),
+                );
+              },
+            )
           ],
         ),
       );
@@ -138,7 +171,27 @@ class SelectSeatPage extends StatelessWidget {
               child: DefaultButton(
                 title: 'Select Seat',
                 height: 50,
-                onTap: () => Navigation.pushName(RoutesName.payment),
+                onTap: () {
+                  final order = OrderModel(
+                    orderId: widget.orderData.orderId,
+                    cinemaLocation: widget.orderData.cinemaLocation,
+                    cinemaName: widget.orderData.cinemaName,
+                    duration: widget.orderData.duration,
+                    image: widget.orderData.image,
+                    genres: widget.orderData.genres,
+                    title: widget.orderData.title,
+                    sectionSeat: ['1'],
+                    selectedSeat: ['A7, A8'],
+                    selectedDate: '10 Dec',
+                    selectedTime: selectedTime,
+                    price: '210000',
+                  );
+
+                  Navigation.pushName(
+                    RoutesName.payment,
+                    arguments: order,
+                  );
+                },
               ),
             ),
           ],

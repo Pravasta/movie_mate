@@ -1,6 +1,8 @@
+import 'package:movie_mate/data/model/response/order_model.dart';
 import 'package:movie_mate/data/model/response/user_response_model.dart';
 import 'package:movie_mate/features/edit_profile/view/edit_profile_page.dart';
 import 'package:movie_mate/features/introduction/view/splash_page.dart';
+import 'package:movie_mate/features/my_ticket/view/detail_ticket_page.dart';
 import 'package:movie_mate/features/my_ticket/view/my_ticket_page.dart';
 import 'package:movie_mate/features/search/view/search_page.dart';
 
@@ -59,19 +61,32 @@ class RoutesHandler {
           builder: (context) => DetailPage(id: id),
           settings: settings,
         );
+
       case RoutesName.selectSeat:
+        final orderData = settings.arguments;
+        if (orderData == null || orderData is! OrderModel) {
+          return _emptyPage;
+        }
         return MaterialPageRoute(
-          builder: (context) => const SelectSeatPage(),
+          builder: (context) => SelectSeatPage(orderData: orderData),
           settings: settings,
         );
       case RoutesName.payment:
+        final order = settings.arguments;
+        if (order == null || order is! OrderModel) {
+          return _emptyPage;
+        }
         return MaterialPageRoute(
-          builder: (context) => const PaymentPage(),
+          builder: (context) => PaymentPage(order: order),
           settings: settings,
         );
-      case RoutesName.myTicket:
+      case RoutesName.detailTicket:
+        final data = settings.arguments;
+        if (data == null || data is! OrderModel) {
+          return _emptyPage;
+        }
         return MaterialPageRoute(
-          builder: (context) => const MyTicketPage(),
+          builder: (context) => DetailTicketPage(data: data),
           settings: settings,
         );
       case RoutesName.editProfile:
@@ -84,6 +99,11 @@ class RoutesHandler {
       case RoutesName.search:
         return MaterialPageRoute(
           builder: (context) => const SearchPage(),
+          settings: settings,
+        );
+      case RoutesName.myTicket:
+        return MaterialPageRoute(
+          builder: (context) => const MyTicketPage(),
           settings: settings,
         );
       default:

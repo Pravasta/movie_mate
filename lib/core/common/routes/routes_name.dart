@@ -15,5 +15,6 @@ class RoutesName {
   static const String search = '/search';
   static const String editProfile = '/edit-profile';
   static const String myTicket = '/my-ticket';
+  static const String detailTicket = '/detail-ticket';
   static const String paymentHistory = '/payment-history';
 }

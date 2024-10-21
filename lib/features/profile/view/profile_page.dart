@@ -126,7 +126,9 @@ class ProfilePage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 30),
         child: Column(
           children: [
-            listMenu(Assets.icons.ticket.path, 'My Ticket', () {}),
+            listMenu(Assets.icons.ticket.path, 'My Ticket', () {
+              Navigation.pushName(RoutesName.myTicket);
+            }),
             const Divider(color: AppColors.greySecondColor),
             listMenu(Assets.icons.shoppingCart.path, 'Payment History', () {}),
             const Divider(color: AppColors.greySecondColor),

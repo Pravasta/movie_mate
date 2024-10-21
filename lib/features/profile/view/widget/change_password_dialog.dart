@@ -2,6 +2,8 @@ import 'package:movie_mate/core/components/message/message_bar.dart';
 import 'package:movie_mate/core/core.dart';
 import 'package:movie_mate/features/profile/bloc/change_password/change_password_bloc.dart';
 
+import '../../../../data/datasources/auth_datasource/auth_local_datasource.dart';
+
 class ChangePasswordDialog extends StatefulWidget {
   const ChangePasswordDialog({super.key});
 
@@ -111,9 +113,10 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
                       MessageBar.messageBar(context, message);
                       Navigation.pop();
                     },
-                    success: (success) {
+                    success: (success) async {
                       MessageBar.messageBar(context, success);
-                      Navigation.pop();
+                      await AuthLocalDatasourceImpl().removeAuthData();
+                      Navigation.pushNameAndRemove(RoutesName.intro);
                     },
                   );
                 },

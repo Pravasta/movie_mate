@@ -41,7 +41,8 @@ class ProfileRepositoryImpl implements ProfileRepository {
   Future<Either<Failure, String>> changePassword(String password) async {
     try {
       await _authRemoteDatasource.changePassword(password);
-      String message = 'Password Success Changes';
+      String message =
+          'Password Success Changes, you can re-login with new password';
 
       return Right(message);
     } on SocketException {

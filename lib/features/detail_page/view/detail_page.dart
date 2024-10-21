@@ -4,6 +4,7 @@ import 'package:movie_mate/core/core.dart';
 import 'package:movie_mate/core/extensions/date_time_ext.dart';
 import 'package:movie_mate/core/variables/variable.dart';
 import 'package:movie_mate/data/model/response/movie_response_model.dart';
+import 'package:movie_mate/data/model/response/order_model.dart';
 import 'package:movie_mate/features/detail_page/bloc/bloc/crud_watchlist_movie_bloc.dart';
 import 'package:movie_mate/features/detail_page/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:movie_mate/features/detail_page/model/detail_page_model.dart';
@@ -36,6 +37,13 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     int cinemaButton = 0;
+
+    String title = '';
+    String duration = '';
+    List<String> genres = [];
+    String cinemaLocation = '';
+    String cinemaName = '';
+    String imageUrl = '';
 
     Widget popUpTitle(MovieDetailResponseModel data) {
       return Container(
@@ -273,8 +281,11 @@ class _DetailPageState extends State<DetailPage> {
                           location: e['location'],
                           isActive: cinemaButton == e['index'],
                           cinemaModel: e['cinema_model'],
-                          onPressed: () =>
-                              setState(() => cinemaButton = e['index']),
+                          onPressed: () => setState(() {
+                            cinemaButton = e['index'];
+                            cinemaName = e['title'];
+                            cinemaLocation = e['location'];
+                          }),
                         ))
                     .toList(),
               );
@@ -294,6 +305,11 @@ class _DetailPageState extends State<DetailPage> {
               child: Text(error.message, style: AppText.text14),
             ),
             loaded: (data) {
+              title = data.title ?? '';
+              duration = '2h29m';
+              genres = data.genres!.map((e) => e.name!).toList();
+              imageUrl = data.posterPath!;
+
               return SizedBox(
                 width: context.deviceWidth,
                 height: context.deviceHeight,
@@ -310,9 +326,11 @@ class _DetailPageState extends State<DetailPage> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      '${Variable.baseImageUrl}${data.posterPath}',
-                                    ),
+                                    image: data.posterPath == null
+                                        ? AssetImage(Assets.images.banner.path)
+                                        : NetworkImage(
+                                            '${Variable.baseImageUrl}${data.posterPath}',
+                                          ),
                                   ),
                                 ),
                               ),
@@ -380,7 +398,21 @@ class _DetailPageState extends State<DetailPage> {
         child: DefaultButton(
           title: 'Select Seat',
           height: 50,
-          onTap: () => Navigation.pushName(RoutesName.selectSeat),
+          onTap: () {
+            final orderData = OrderModel(
+              orderId: DateTime.now().microsecondsSinceEpoch.toString(),
+              cinemaLocation: cinemaLocation,
+              title: title,
+              image: imageUrl,
+              duration: duration,
+              genres: genres,
+              cinemaName: cinemaName,
+            );
+            Navigation.pushName(
+              RoutesName.selectSeat,
+              arguments: orderData,
+            );
+          },
         ),
       ),
     );
