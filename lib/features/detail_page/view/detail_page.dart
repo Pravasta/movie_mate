@@ -23,6 +23,14 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  int cinemaButton = -1;
+  String title = '';
+  String duration = '';
+  List<String> genres = [];
+  String cinemaLocation = '';
+  String cinemaName = '';
+  String imageUrl = '';
+
   @override
   void initState() {
     context
@@ -36,15 +44,6 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    int cinemaButton = 0;
-
-    String title = '';
-    String duration = '';
-    List<String> genres = [];
-    String cinemaLocation = '';
-    String cinemaName = '';
-    String imageUrl = '';
-
     Widget popUpTitle(MovieDetailResponseModel data) {
       return Container(
         width: MediaQuery.of(context).size.width,
@@ -271,27 +270,48 @@ class _DetailPageState extends State<DetailPage> {
             style: AppText.text20.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
-          StatefulBuilder(
-            builder: (context, setState) {
-              return Column(
-                children: DetailPageModel.cinemaData
-                    .map((e) => CinemaCardWidget(
-                          title: e['title'],
-                          distance: e['distance'],
-                          location: e['location'],
-                          isActive: cinemaButton == e['index'],
-                          cinemaModel: e['cinema_model'],
-                          onPressed: () => setState(() {
-                            cinemaButton = e['index'];
-                            cinemaName = e['title'];
-                            cinemaLocation = e['location'];
-                          }),
-                        ))
-                    .toList(),
-              );
-            },
-          )
+          Column(
+            children: DetailPageModel.cinemaData
+                .map((e) => CinemaCardWidget(
+                      title: e['title'],
+                      distance: e['distance'],
+                      location: e['location'],
+                      isActive: cinemaButton == e['index'],
+                      cinemaModel: e['cinema_model'],
+                      onPressed: () => setState(() {
+                        cinemaButton = e['index'];
+                        cinemaName = e['title'];
+                        cinemaLocation = e['location'];
+                      }),
+                    ))
+                .toList(),
+          ),
         ],
+      );
+    }
+
+    Widget submitButton() {
+      return DefaultButton(
+        title: 'Select Seat',
+        backgroundColor:
+            cinemaButton == -1 ? AppColors.greyColor : AppColors.primaryColor,
+        height: 50,
+        onTap: () {
+          final orderData = OrderModel(
+            orderId: DateTime.now().microsecondsSinceEpoch.toString(),
+            cinemaLocation: cinemaLocation,
+            title: title,
+            image: imageUrl,
+            duration: duration,
+            genres: genres,
+            cinemaName: cinemaName,
+          );
+          if (cinemaButton == -1) {
+            return null;
+          } else {
+            Navigation.pushName(RoutesName.selectSeat, arguments: orderData);
+          }
+        },
       );
     }
 
@@ -395,25 +415,7 @@ class _DetailPageState extends State<DetailPage> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(15),
-        child: DefaultButton(
-          title: 'Select Seat',
-          height: 50,
-          onTap: () {
-            final orderData = OrderModel(
-              orderId: DateTime.now().microsecondsSinceEpoch.toString(),
-              cinemaLocation: cinemaLocation,
-              title: title,
-              image: imageUrl,
-              duration: duration,
-              genres: genres,
-              cinemaName: cinemaName,
-            );
-            Navigation.pushName(
-              RoutesName.selectSeat,
-              arguments: orderData,
-            );
-          },
-        ),
+        child: submitButton(),
       ),
     );
   }

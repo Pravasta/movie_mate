@@ -7,27 +7,27 @@ class ApiErrorHandler {
   }) {
     switch (statusCode) {
       case 400:
-        return BadRequestException();
+        return BadRequestException(message: error);
       case 401:
-        return UnauthorizedException();
+        return UnauthorizedException(message: error);
       case 402:
-        return PaymentRequiredException();
+        return PaymentRequiredException(message: error);
       case 403:
-        return ForbiddenException();
+        return ForbiddenException(message: error);
       case 404:
-        return NotFoundException();
+        return NotFoundException(message: error);
       case 405:
-        return MethodNotAllowedException();
+        return MethodNotAllowedException(message: error);
       case 406:
-        return NotAcceptableException();
+        return NotAcceptableException(message: error);
       case 408:
-        return RequestTimeoutException();
+        return RequestTimeoutException(message: error);
       case 500:
-        return InternalServerErrorException();
+        return InternalServerErrorException(message: error);
       case 501:
-        return NotImplementedException();
+        return NotImplementedException(message: error);
       case 502:
-        return BadGatewayException();
+        return BadGatewayException(message: error);
       default:
         return ApiException(message: error);
     }

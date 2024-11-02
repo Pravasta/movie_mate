@@ -1,13 +1,11 @@
-import 'package:movie_mate/core/components/message/message_bar.dart';
 import 'package:movie_mate/core/core.dart';
 import 'package:movie_mate/core/extensions/num_ext.dart';
 import 'package:movie_mate/core/extensions/time_ext.dart';
 import 'package:movie_mate/data/model/response/order_model.dart';
 import 'package:movie_mate/features/payment/model/payment_model.dart';
+import 'package:movie_mate/features/payment/view/widget/payment_qris_dialog.dart';
 import 'package:movie_mate/features/payment/view/widget/payment_card_widget.dart';
 import 'package:timer_count_down/timer_count_down.dart';
-
-import '../bloc/create_order_bloc.dart';
 
 class PaymentPage extends StatelessWidget {
   const PaymentPage({super.key, required this.order});
@@ -30,7 +28,7 @@ class PaymentPage extends StatelessWidget {
             children: [
               Text('Order ID', style: AppText.text14),
               const Spacer(),
-              Text('78889377726',
+              Text(order.orderId ?? '',
                   style: AppText.text14.copyWith(fontWeight: FontWeight.bold)),
             ],
           ),
@@ -39,7 +37,7 @@ class PaymentPage extends StatelessWidget {
             children: [
               Text('Seat', style: AppText.text14),
               const Spacer(),
-              Text('H7, H8',
+              Text(order.selectedSeat!.map((e) => e).join(', '),
                   style: AppText.text14.copyWith(fontWeight: FontWeight.bold)),
             ],
           ),
@@ -74,7 +72,7 @@ class PaymentPage extends StatelessWidget {
             children: [
               Text('Total', style: AppText.text14),
               const Spacer(),
-              Text(150000.currencyFormatRp,
+              Text(int.tryParse(order.price!)!.currencyFormatRp,
                   style: AppText.text22.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.primaryColor)),
@@ -170,66 +168,39 @@ class PaymentPage extends StatelessWidget {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(15),
-        child: BlocConsumer<CreateOrderBloc, CreateOrderState>(
-          listener: (context, state) {
-            state.maybeWhen(
-              orElse: () {},
-              error: (error) => MessageBar.messageBar(context, error),
-              success: (success) {
-                final data = OrderModel(
-                  orderId: order.orderId,
-                  cinemaLocation: order.cinemaLocation,
-                  cinemaName: order.cinemaName,
-                  duration: order.duration,
-                  genres: order.genres,
-                  price: order.price,
-                  image: order.image,
-                  sectionSeat: order.sectionSeat,
-                  selectedDate: order.selectedDate,
-                  selectedSeat: order.selectedSeat,
-                  selectedTime: order.selectedTime,
-                  title: order.title,
-                  paymentMethod: paymentName,
-                );
-                MessageBar.messageBar(context, success);
-                Navigation.pushReplacement(
-                  RoutesName.detailTicket,
-                  arguments: data,
-                );
-              },
+        child: DefaultButton(
+          title: 'Continue',
+          height: 50,
+          onTap: () {
+            final data = OrderModel(
+              orderId: order.orderId,
+              cinemaLocation: order.cinemaLocation,
+              cinemaName: order.cinemaName,
+              duration: order.duration,
+              genres: order.genres,
+              price: order.price,
+              image: order.image,
+              sectionSeat: order.sectionSeat,
+              selectedDate: order.selectedDate,
+              selectedSeat: order.selectedSeat,
+              selectedTime: order.selectedTime,
+              title: order.title,
+              paymentMethod: paymentName,
             );
-          },
-          builder: (context, state) {
-            return state.maybeWhen(
-              orElse: () {
-                return DefaultButton(
-                  title: 'Continue',
-                  height: 50,
-                  onTap: () {
-                    final data = OrderModel(
-                      orderId: order.orderId,
-                      cinemaLocation: order.cinemaLocation,
-                      cinemaName: order.cinemaName,
-                      duration: order.duration,
-                      genres: order.genres,
-                      price: order.price,
-                      image: order.image,
-                      sectionSeat: order.sectionSeat,
-                      selectedDate: order.selectedDate,
-                      selectedSeat: order.selectedSeat,
-                      selectedTime: order.selectedTime,
-                      title: order.title,
-                      paymentMethod: paymentName,
-                    );
 
-                    context
-                        .read<CreateOrderBloc>()
-                        .add(CreateOrderEvent.createOrdert(data));
-                  },
+            switch (selectedPayment) {
+              case 0:
+                print(paymentName);
+              case 1:
+                print(paymentName);
+              case 2:
+                showDialog(
+                  context: context,
+                  builder: (context) => PaymentQrisDialog(order: data),
                 );
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-            );
+              default:
+                print(paymentName);
+            }
           },
         ),
       ),

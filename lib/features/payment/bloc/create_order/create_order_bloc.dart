@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_mate/features/payment/repository/order_repository.dart';
 
-import '../../../data/model/response/order_model.dart';
+import '../../../../data/model/response/order_model.dart';
 
 part 'create_order_event.dart';
 part 'create_order_state.dart';
