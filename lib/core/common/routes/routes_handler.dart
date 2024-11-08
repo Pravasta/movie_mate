@@ -4,6 +4,7 @@ import 'package:movie_mate/features/edit_profile/view/edit_profile_page.dart';
 import 'package:movie_mate/features/introduction/view/splash_page.dart';
 import 'package:movie_mate/features/my_ticket/view/detail_ticket_page.dart';
 import 'package:movie_mate/features/my_ticket/view/my_ticket_page.dart';
+import 'package:movie_mate/features/payment/view/widget/payment_bank_transfer.dart';
 import 'package:movie_mate/features/search/view/search_page.dart';
 
 import '../../core.dart';
@@ -104,6 +105,13 @@ class RoutesHandler {
       case RoutesName.myTicket:
         return MaterialPageRoute(
           builder: (context) => const MyTicketPage(),
+          settings: settings,
+        );
+      case RoutesName.transferBankPage:
+        final order = settings.arguments;
+        if (order == null || order is! OrderModel) return _emptyPage;
+        return MaterialPageRoute(
+          builder: (context) => PaymentBankTransfer(order: order),
           settings: settings,
         );
       default:

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class QrisStatusResponseModel {
+class PaymentStatusResponseModel {
   final DateTime? transactionTime;
   final String? grossAmount;
   final String? currency;
@@ -15,7 +15,7 @@ class QrisStatusResponseModel {
   final String? statusMessage;
   final String? merchantId;
 
-  QrisStatusResponseModel({
+  PaymentStatusResponseModel({
     this.transactionTime,
     this.grossAmount,
     this.currency,
@@ -31,13 +31,13 @@ class QrisStatusResponseModel {
     this.merchantId,
   });
 
-  factory QrisStatusResponseModel.fromJson(String str) =>
-      QrisStatusResponseModel.fromMap(json.decode(str));
+  factory PaymentStatusResponseModel.fromJson(String str) =>
+      PaymentStatusResponseModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory QrisStatusResponseModel.fromMap(Map<String, dynamic> json) =>
-      QrisStatusResponseModel(
+  factory PaymentStatusResponseModel.fromMap(Map<String, dynamic> json) =>
+      PaymentStatusResponseModel(
         transactionTime: json["transaction_time"] == null
             ? null
             : DateTime.parse(json["transaction_time"]),

@@ -5,8 +5,9 @@ import 'package:movie_mate/features/my_ticket/repository/my_ticket_repository.da
 import 'package:movie_mate/features/payment/bloc/check_payment_status/check_payment_status_bloc.dart';
 import 'package:movie_mate/features/payment/bloc/create_order/create_order_bloc.dart';
 import 'package:movie_mate/features/payment/bloc/generate_qris/generate_qris_bloc.dart';
+import 'package:movie_mate/features/payment/bloc/payment_bank/payment_bank_bloc.dart';
 import 'package:movie_mate/features/payment/repository/order_repository.dart';
-import 'package:movie_mate/features/payment/repository/qris_repository.dart';
+import 'package:movie_mate/features/payment/repository/payment_repository.dart';
 import 'package:movie_mate/features/search/bloc/search_movie_bloc.dart';
 import 'package:movie_mate/features/search/repository/search_repository.dart';
 import 'package:movie_mate/features/watchlist_movie/bloc/get_watchlist_movie_bloc.dart';
@@ -102,10 +103,14 @@ class MyApp extends StatelessWidget {
                 GetAllTicketOrdersBloc(MyTicketRepositoryImpl.create()),
           ),
           BlocProvider(
-            create: (_) => GenerateQrisBloc(QrisRepositoryImpl.create()),
+            create: (_) => GenerateQrisBloc(PaymentRepositoryImpl.create()),
           ),
           BlocProvider(
-            create: (_) => CheckPaymentStatusBloc(QrisRepositoryImpl.create()),
+            create: (_) =>
+                CheckPaymentStatusBloc(PaymentRepositoryImpl.create()),
+          ),
+          BlocProvider(
+            create: (_) => PaymentBankBloc(PaymentRepositoryImpl.create()),
           ),
         ],
         child: MaterialApp(

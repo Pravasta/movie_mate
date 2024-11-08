@@ -192,14 +192,18 @@ class PaymentPage extends StatelessWidget {
               case 0:
                 print(paymentName);
               case 1:
-                print(paymentName);
+                Navigation.pushName(RoutesName.transferBankPage,
+                    arguments: data);
               case 2:
                 showDialog(
                   context: context,
                   builder: (context) => PaymentQrisDialog(order: data),
                 );
               default:
-                print(paymentName);
+                showDialog(
+                  context: context,
+                  builder: (context) => PaymentQrisDialog(order: data),
+                );
             }
           },
         ),

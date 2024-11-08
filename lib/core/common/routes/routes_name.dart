@@ -17,4 +17,5 @@ class RoutesName {
   static const String myTicket = '/my-ticket';
   static const String detailTicket = '/detail-ticket';
   static const String paymentHistory = '/payment-history';
+  static const String transferBankPage = '/transfer-bank-page';
 }

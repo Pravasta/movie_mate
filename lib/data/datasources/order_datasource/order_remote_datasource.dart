@@ -44,6 +44,7 @@ class OrderRemoteDatasourceImpl implements OrderRemoteDatasource {
           .collection('users')
           .doc(currentUid)
           .collection('orders')
+          .orderBy('orderId', descending: true)
           .get();
       final List<OrderModel> result = orderList.docs
           .map((e) => OrderModel.fromFirestore(e.data()))
